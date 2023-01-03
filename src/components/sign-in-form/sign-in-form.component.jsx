@@ -1,68 +1,60 @@
 import {useState} from 'react';
 import { 
-    createAuthUserWithEmailAndPassword,
-    createUserDocumentFromAuth
+    signInWithGooglePopup,
+    createUserDocumentFromAuth,
+    singInAuthUserWithEmailAndPassword
 } from '../../utils/firebase/firebase.utils';
 
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 
+import './sign-in-form.styles.scss';
+
 const defaultFormFields = {
-    displayName:'',
     email:'',
     password:'',
-    confirmPassword:''
 }
 
-const SingUpForm = ()=>{
+const SingInForm = ()=>{
     const [formFields,setFormFields] = useState(defaultFormFields);
-    const  {displayName,email,password,confirmPassword} = formFields;
+    const  {email,password} = formFields;
+
     const handleChange = (event)=>{
         const {name,value} = event.target;
         setFormFields({...formFields,[name]:value});
     }
-    // console.log(formFields);
-
     const restFormFields = ()=>{
         setFormFields(defaultFormFields);
     }
 
+    const singInWithGoogle = async()=>{
+       const {user} = await signInWithGooglePopup();
+       await createUserDocumentFromAuth(user);
+    }
+
     const handleSubmit = async(event)=>{
         event.preventDefault();
-        if(password !== confirmPassword){
-            alert("passwords do not match");
-            return;
-        }
         try{
-            const {user} = await createAuthUserWithEmailAndPassword(
-                email,
-                password
-            );
-
-            await createUserDocumentFromAuth(user,{displayName});
+            const response = await singInAuthUserWithEmailAndPassword(email,password);
+            console.log(response);
             restFormFields();
         }catch(error){
-            if(error.code ==="auth/email-already-in-use"){
-                alert("Cannot create user,email already in use.");
+            if(error.code === "auth/user-not-found"){
+                alert("User not found.");
             }
-            console.log(error.message);
+            if(error.code === "auth/wrong-password"){
+                alert("incorrect password.");
+            }
+            console.log(error);
             throw error;
         }
         
     }
     return(
         <div className='sign-up-container'>
-            <h2>Don't have an account?</h2>
-            <span>Sign up with your email and password</span>
+            <h2>Already have an account?</h2>
+            <span>Sign in with your email and password</span>
             <form onSubmit={handleSubmit}>
-                <FormInput
-                    label="Display Name"
-                    type="text"
-                    required
-                    onChange={handleChange}
-                    name="displayName"
-                    value={displayName}
-                />      
                 <FormInput
                     label="email"
                     type="email"
@@ -79,16 +71,12 @@ const SingUpForm = ()=>{
                     name="password"
                     value={password}
                 />       
-                <FormInput
-                    label="Confirm Password"
-                    type="password"
-                    required
-                    onChange={handleChange}
-                    name="confirmPassword"
-                    value={confirmPassword}
-                />        
                 {/*<button type="submit">Sign Up</button>*/}
-                <Button buttonType="default" type="submit">Sign Up</Button>
+                <div className='button-container'>
+                    <Button  type="submit">Sign In</Button>
+                    <Button buttonType="google" type="button" onClick={singInWithGoogle}>Google Sign In</Button>
+                </div>
+                    
             </form>
     {/* ===v1===
             <form onSubmit={handleSubmit}>
@@ -108,4 +96,4 @@ const SingUpForm = ()=>{
     )
 }
 
-export default SingUpForm;
+export default SingInForm;
