@@ -1,4 +1,8 @@
-import {useState} from 'react';
+//===v1===
+// import {useState} from 'react';
+//======
+import { useState,useContext } from 'react';
+import { UserContext } from '../../contexts/user.context';
 import { 
     signInWithGooglePopup,
     createUserDocumentFromAuth,
@@ -18,7 +22,9 @@ const defaultFormFields = {
 const SingInForm = ()=>{
     const [formFields,setFormFields] = useState(defaultFormFields);
     const  {email,password} = formFields;
-
+//===Use Context===
+    const {setCurrentUser} = useContext(UserContext);
+//=================
     const handleChange = (event)=>{
         const {name,value} = event.target;
         setFormFields({...formFields,[name]:value});
@@ -36,7 +42,10 @@ const SingInForm = ()=>{
         event.preventDefault();
         try{
             const response = await singInAuthUserWithEmailAndPassword(email,password);
-            console.log(response);
+            // console.log(response);
+            //===Use Context===
+                setCurrentUser(response.user);
+            //======
             restFormFields();
         }catch(error){
             if(error.code === "auth/user-not-found"){
