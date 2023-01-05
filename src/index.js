@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 //====Provider====
 import { UserProvider } from './contexts/user.context';
 import { ProductsProvider } from './contexts/products.context';
+import { CartProvider } from './contexts/cart.context';
 //================
 import App from './App';
 import './index.scss';
@@ -26,8 +27,10 @@ root.render(
     <BrowserRouter>
       {/*===set provider====*/}
       <UserProvider>
-        <ProductsProvider>
-          <App />
+        <ProductsProvider>´
+          <CartProvider>
+            <App />
+          </CartProvider>
         </ProductsProvider>
       </UserProvider>
       {/*===set provider====*/}

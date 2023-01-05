@@ -2,6 +2,7 @@
 //===Use Context===
 import { Fragment,useContext } from "react";
 import { UserContext } from "../../contexts/user.context";
+import { CartContext } from "../../contexts/cart.context";
 //======
 
 import { Outlet,Link } from "react-router-dom";
@@ -21,6 +22,7 @@ const Navigation = ()=>{
     //const { currentUser,setCurrentUser } = useContext(UserContext);
     // console.log(currentUser);
     const { currentUser} = useContext(UserContext);
+    const {isCartOpen} = useContext(CartContext);
   //============
   //=================
   //=== authentication listener ===
@@ -48,7 +50,7 @@ const Navigation = ()=>{
             </Link>
               ===========
           */}
-            {/* ===Use Context====*/}
+            {/* ===User Context====*/}
               {/*=== authentication listener ===*/}
             {/*<span className="nav-link" onClick={signOutHandler}>*/}
               {/*==============*/}
@@ -60,10 +62,10 @@ const Navigation = ()=>{
                 <Link className="nav-link" to="/auth">SIGN IN</Link>
               )
             }
-            {/* ===========*/}
+            {/* ====User Context===*/}
             <CartIcon/>
           </div>
-          <CartDropdown/>
+           {isCartOpen && <CartDropdown/> }
         </div>
         <Outlet/>
       </Fragment>
