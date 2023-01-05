@@ -11,6 +11,7 @@ import { signOutUser } from "../../utils/firebase/firebase.utils";
 import {ReactComponent as CrwnLogo} from '../../assets/crown.svg';
 //===icon component===
 import CartIcon from "../../components/cart-icon/cart-icon.component";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 //====================
 import './navigation.styles.scss';
 
@@ -62,6 +63,7 @@ const Navigation = ()=>{
             {/* ===========*/}
             <CartIcon/>
           </div>
+          <CartDropdown/>
         </div>
         <Outlet/>
       </Fragment>
