@@ -9,7 +9,9 @@ import {
 
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
-import { UserContext } from '../../contexts/user.context';
+ //=== authentication listener ===
+//import { UserContext } from '../../contexts/user.context';
+//================================
 
 const defaultFormFields = {
     displayName:'',
@@ -23,7 +25,9 @@ const SingUpForm = ()=>{
     const  {displayName,email,password,confirmPassword} = formFields;
 
     //=== Use Context===
-    const {setCurrentUser} = useContext(UserContext);
+    //=== authentication listener ===
+    // const {setCurrentUser} = useContext(UserContext);
+    //========
     //==================
 
     const handleChange = (event)=>{
@@ -48,7 +52,9 @@ const SingUpForm = ()=>{
                 password
             );
              //=== Use Context===
-            setCurrentUser(user);
+             //=== authentication listener ===
+            // setCurrentUser(user);
+            //=== authentication listener ===
             //==================
             await createUserDocumentFromAuth(user,{displayName});
             restFormFields();

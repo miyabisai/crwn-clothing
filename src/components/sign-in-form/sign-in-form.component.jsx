@@ -2,7 +2,9 @@
 // import {useState} from 'react';
 //======
 import { useState,useContext } from 'react';
-import { UserContext } from '../../contexts/user.context';
+//=== authentication listener ===
+// import { UserContext } from '../../contexts/user.context';
+//=======
 import { 
     signInWithGooglePopup,
     createUserDocumentFromAuth,
@@ -23,7 +25,9 @@ const SingInForm = ()=>{
     const [formFields,setFormFields] = useState(defaultFormFields);
     const  {email,password} = formFields;
 //===Use Context===
-    const {setCurrentUser} = useContext(UserContext);
+//=== authentication listener ===
+    // const {setCurrentUser} = useContext(UserContext);
+//=========
 //=================
     const handleChange = (event)=>{
         const {name,value} = event.target;
@@ -35,7 +39,9 @@ const SingInForm = ()=>{
 
     const singInWithGoogle = async()=>{
        const {user} = await signInWithGooglePopup();
-       await createUserDocumentFromAuth(user);
+       //=== authentication listener ===
+    //    await createUserDocumentFromAuth(user);
+       //============
     }
 
     const handleSubmit = async(event)=>{
@@ -44,7 +50,9 @@ const SingInForm = ()=>{
             const response = await singInAuthUserWithEmailAndPassword(email,password);
             // console.log(response);
             //===Use Context===
-                setCurrentUser(response.user);
+            //=== authentication listener ===
+                // setCurrentUser(response.user);
+            //=========
             //======
             restFormFields();
         }catch(error){

@@ -12,15 +12,19 @@ import './navigation.styles.scss';
 
 const Navigation = ()=>{
   //===Use Context===
-    const { currentUser,setCurrentUser } = useContext(UserContext);
+  //=== authentication listener ===
+    //const { currentUser,setCurrentUser } = useContext(UserContext);
     // console.log(currentUser);
+    const { currentUser} = useContext(UserContext);
+  //============
   //=================
-    const signOutHandler = async()=>{
-      const response = await signOutUser();
-      // console.log(response);
-      setCurrentUser(null);
-    }
-
+  //=== authentication listener ===
+    // const signOutHandler = async()=>{
+    //   const response = await signOutUser();
+    //   // console.log(response);
+    //   setCurrentUser(null);
+    // }
+  //===============
     return(
       <Fragment>
         <div className="navigation">
@@ -40,8 +44,12 @@ const Navigation = ()=>{
               ===========
           */}
             {/* ===Use Context====*/}
+              {/*=== authentication listener ===*/}
+            {/*<span className="nav-link" onClick={signOutHandler}>*/}
+              {/*==============*/}
             {
-              currentUser ?(<span className="nav-link" onClick={signOutHandler}>
+              currentUser ?(
+                <span className="nav-link" onClick={signOutUser}>
                 SIGN OUT</span>):
               (
                 <Link className="nav-link" to="/auth">SIGN IN</Link>

@@ -9,7 +9,7 @@ import {
     signInWithEmailAndPassword,
     signOut,
 //===observer===
-    onAuthStateChange
+    onAuthStateChanged
 //==============
 } from 'firebase/auth';
 import {
@@ -87,7 +87,7 @@ export const singInAuthUserWithEmailAndPassword = async (email,password)=>{
 
 export const signOutUser = async()=> await signOut(auth);
 //===state changer observer===
-export const onAuthStateChangeListener = ()=>{
-
-}
+export const onAuthStateChangedListener = (callback)=>{
+    onAuthStateChanged(auth,callback)
+};
 //============================
