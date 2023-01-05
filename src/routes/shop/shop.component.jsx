@@ -1,11 +1,14 @@
 // import SHOP_DATA from '../../assets/shop-data.json';
 import { useContext } from 'react';
 import {ProductsContext} from '../../contexts/products.context';
+import ProudctCard from '../../components/product-card/product-card.component';
+
+import './shop.styles.scss';
 
 const Shop = ()=>{
     const {products} = useContext(ProductsContext);
     return(
-        <div>
+        <div className='products-container'>
           {
             //===use json file===
             // SHOP_DATA.map(({id,name})=>(
@@ -15,10 +18,13 @@ const Shop = ()=>{
             // ))
             //=================
             //===use context===
-            products.map(({id,name})=>(
-                 <div key={id}>
-                    {name}
-                 </div>
+            products.map((product)=>(
+                <ProudctCard key={product.id} product={product}></ProudctCard>
+                //=====v1=====
+                //  <div key={id}>
+                //     {name}
+                //  </div>
+                //===========
             ))
             //=================
         }

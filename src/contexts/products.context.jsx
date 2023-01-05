@@ -2,6 +2,7 @@ import { createContext,useState } from 'react';
 
 import PRODUCTS from '../../src/assets/shop-data.json';
 
+
 export const ProductsContext = createContext({
     products:[]
 });

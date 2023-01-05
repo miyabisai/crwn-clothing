@@ -7,7 +7,11 @@ import { UserContext } from "../../contexts/user.context";
 import { Outlet,Link } from "react-router-dom";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
+
 import {ReactComponent as CrwnLogo} from '../../assets/crown.svg';
+//===icon component===
+import CartIcon from "../../components/cart-icon/cart-icon.component";
+//====================
 import './navigation.styles.scss';
 
 const Navigation = ()=>{
@@ -56,6 +60,7 @@ const Navigation = ()=>{
               )
             }
             {/* ===========*/}
+            <CartIcon/>
           </div>
         </div>
         <Outlet/>
