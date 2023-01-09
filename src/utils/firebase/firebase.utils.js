@@ -19,7 +19,9 @@ import {
     setDoc,
     //===collection===
     collection,
-    writeBatch
+    writeBatch,
+    getDocs,
+    query
     //===collection===
 }from 'firebase/firestore';
 
@@ -78,6 +80,25 @@ export const createUserDocumentFromAuth = async (userAuth,addionalInfo={})=>{
     return userDocRef;
 }
 
+
+export const createAuthUserWithEmailAndPassword = async (email,password)=>{
+    if(!email||!password) return;
+    return await createUserWithEmailAndPassword(auth,email,password);
+}
+
+export const singInAuthUserWithEmailAndPassword = async (email,password)=>{
+    if(!email||!password) return;
+    return await signInWithEmailAndPassword(auth,email,password);
+}
+
+export const signOutUser = async()=> await signOut(auth);
+//===state changer observer===
+export const onAuthStateChangedListener = (callback)=>{
+    onAuthStateChanged(auth,callback)
+};
+//============================
+
+
 //===collection===
 export const addCollectionAndDocuments = async(collectionKey,objectsToAdd)=>{
     
@@ -97,21 +118,18 @@ export const addCollectionAndDocuments = async(collectionKey,objectsToAdd)=>{
     }
    
 }
+
+export const getCategoriesAndDocuments = async()=>{
+    const collectionRef = collection(db,'categories');
+    const q = query(collectionRef);
+
+    const querySnapShot = await getDocs(q);
+    const categoryMap = querySnapShot.docs.reduce((acc,snapShot)=>{
+        const {title,items} = snapShot.data();
+        acc[title.toLowerCase()] = items;
+        return acc;
+    },{});
+
+    return categoryMap;
+}
 //===collection===
-
-export const createAuthUserWithEmailAndPassword = async (email,password)=>{
-    if(!email||!password) return;
-    return await createUserWithEmailAndPassword(auth,email,password);
-}
-
-export const singInAuthUserWithEmailAndPassword = async (email,password)=>{
-    if(!email||!password) return;
-    return await signInWithEmailAndPassword(auth,email,password);
-}
-
-export const signOutUser = async()=> await signOut(auth);
-//===state changer observer===
-export const onAuthStateChangedListener = (callback)=>{
-    onAuthStateChanged(auth,callback)
-};
-//============================

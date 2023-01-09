@@ -11,7 +11,10 @@ import {
 //========
 //=== collection====
 // import SHOP_DATA from '../assets/shop-data';
-import {addCollectionAndDocuments} from '../utils/firebase/firebase.utils';
+import {
+    addCollectionAndDocuments,
+    getCategoriesAndDocuments
+} from '../utils/firebase/firebase.utils';
 //=== collection ====
 
 export const ProductsContext = createContext({
@@ -27,6 +30,14 @@ export const ProductsProvider = ({children})=>{
     // useEffect(()=>{
     //     addCollectionAndDocuments('categories',products);
     // },[])
+    useEffect(()=>{
+        const getCategoriesMap = async()=>{
+            const categoryMap = await getCategoriesAndDocuments();
+            console.log(categoryMap);
+        }
+        getCategoriesMap();
+    },[]);
+
     //=== collection ===
     const value = {products};
     return(
