@@ -80,6 +80,27 @@ export const createUserDocumentFromAuth = async (userAuth,addionalInfo={})=>{
     return userDocRef;
 }
 
+//===collection===
+export const addCollectionAndDocuments = async(collectionKey,objectsToAdd)=>{
+    
+    const collectionRef = collection(db,collectionKey);
+    const batch = writeBatch(db);
+    
+    objectsToAdd.forEach(object=>{
+        // console.log(object.title.toLowerCase());
+        const docRef = doc(collectionRef,object.title.toLowerCase());
+        batch.set(docRef,object);
+    })
+    try{
+        await batch.commit();
+        console.log('Batch is done');
+    }catch(error){
+        console.log(error);
+    }
+   
+}
+//===collection===
+
 export const createAuthUserWithEmailAndPassword = async (email,password)=>{
     if(!email||!password) return;
     return await createUserWithEmailAndPassword(auth,email,password);
