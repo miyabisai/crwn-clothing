@@ -4,7 +4,12 @@ import { BrowserRouter } from 'react-router-dom';
 
 //====Provider====
 import { UserProvider } from './contexts/user.context';
-import { ProductsProvider } from './contexts/products.context';
+//===categories===
+//===v1===
+// import { ProductsProvider } from './contexts/products.context';
+//===v1===
+import { CategoriesProvider } from './contexts/categories.context';
+//===categories===
 import { CartProvider } from './contexts/cart.context';
 //================
 import App from './App';
@@ -27,11 +32,13 @@ root.render(
     <BrowserRouter>
       {/*===set provider====*/}
       <UserProvider>
-        <ProductsProvider>´
+        {/*  <ProductsProvider>*/}
+        <CategoriesProvider>
           <CartProvider>
             <App />
           </CartProvider>
-        </ProductsProvider>
+        </CategoriesProvider>
+        {/* </ProductsProvider>*/}
       </UserProvider>
       {/*===set provider====*/}
     </BrowserRouter>
