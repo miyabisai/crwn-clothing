@@ -23,3 +23,4 @@ yarn-error.log*
 
 src/App2.js
 src/routes/sign-in/sign-in.component2.jsx
+src/routes/shop/shop.component2.jsx

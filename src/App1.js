@@ -20,7 +20,7 @@ const App = ()=>{
       <Route path='/' element={<Navigation/>}>
       {/*<Route path='/home' element={<Home/>}/>*/}
         <Route index element={<Home/>}/>
-        <Route path='shop/*' element={<Shop/>}/>
+        <Route path='shop' element={<Shop/>}/>
         {/*
           ===v1===
         <Route path='sign-in' element={<SignIn/>}/>
