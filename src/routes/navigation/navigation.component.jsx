@@ -1,10 +1,13 @@
 // import { Fragment } from "react";
 //===Use Context===
 import { Fragment, useContext } from "react";
-import { UserContext } from "../../contexts/user.context";
+import { UserContext } from "../../contexts/user.context.jsx";
 import { CartContext } from "../../contexts/cart.context";
 //======
-
+//=== redux ===
+import {useSelector} from 'react-redux';
+import { selectCurrentUser } from "../../store/user/user.selector.js";
+//=== redux ===
 import { Outlet, Link } from "react-router-dom";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
@@ -17,13 +20,19 @@ import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component
 import './navigation.styles.scss';
 
 const Navigation = () => {
+//=== redux ===
+// const { currentUser } = useContext(UserContext);
+// const currentUser = useSelector(state=>state.user.currentUser);
+const currentUser = useSelector(selectCurrentUser);
+//=== redux ===
   //===Use Context===
   //=== authentication listener ===
   //const { currentUser,setCurrentUser } = useContext(UserContext);
   // console.log(currentUser);
-  const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
   //============
+
+
   //=================
   //=== authentication listener ===
   // const signOutHandler = async()=>{

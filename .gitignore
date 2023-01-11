@@ -23,7 +23,10 @@ yarn-error.log*
 
 src/App1.js
 src/App2.js
+src/App3.js
 src/routes/sign-in/sign-in.component2.jsx
 src/routes/shop/shop.component2.jsx
 src/contexts/user.context1.jsx
+src/contexts/user.context2.jsx
+src/contexts/user.context3.jsx
 src/contexts/cart.context1.jsx

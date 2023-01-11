@@ -22,6 +22,7 @@ export const UserContext = createContext({
     setCurrentUser:()=>null
 }); 
 //=== reducer ===
+//=== redux ===
 export const USER_ACTION_TYPES = {
     SET_CURRENT_USER:'SET_CURRENT_USER'
 }
@@ -46,6 +47,7 @@ const userReducer = (state,action)=>{
 const INITIAL_STATE = {
     currentUser:null
 }
+//=== redux ===
 
 //=== reducer ===
 
@@ -61,8 +63,8 @@ export const UserProvider = ({children})=>{
     }
 //=== reducer ===
     const value = {currentUser,setCurrentUser};
-
     //===state changer observer===
+    //=== redux ===
     useEffect(()=>{
         const unsubscribe = onAuthStateChangedListener((user)=>{
             //=== authentication listener ===
@@ -75,6 +77,8 @@ export const UserProvider = ({children})=>{
         });
         return unsubscribe;
     },[]);
+    //=== redux === 
     //============================
+    
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }

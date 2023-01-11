@@ -11,6 +11,13 @@ import {Routes,Route} from 'react-router-dom';
 import CategoriesPreview from '../categories-preview/categories-preview.components';
 import Category from '../category/category.component';
 import './shop.styles.scss';
+//=== categories redux ===
+import {useEffect} from 'react';
+import { useDispatch } from 'react-redux';
+import { getCategoriesAndDocuments } from '../../utils/firebase/firebase.utils';
+import { setCategoriesMap } from '../../store/categories/category.action';
+
+//=== categories redux ===
 
 const Shop = () => {
     //=== categories===
@@ -21,6 +28,19 @@ const Shop = () => {
     //console.log(categoriesMap);
     //===v2===
     //=== categories===
+    //=== categories redux ====
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        const getCategoriesMap = async()=>{
+            const categoryMap = await getCategoriesAndDocuments();
+            const categoryMapPayload = setCategoriesMap(categoryMap);
+            // console.log(categoryMapPayload);
+            dispatch(categoryMapPayload);
+        }
+        getCategoriesMap();    
+    },[]);
+
+    //=== categories redux ===
     return (
         <Routes>
             <Route index element={<CategoriesPreview/>}></Route>

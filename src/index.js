@@ -4,6 +4,11 @@ import { BrowserRouter } from 'react-router-dom';
 
 //====Provider====
 import { UserProvider } from './contexts/user.context';
+//====Provider====
+//==== redux ====
+import { Provider } from 'react-redux';
+import {store} from './store/store';
+//=== redux ===
 //===categories===
 //===v1===
 // import { ProductsProvider } from './contexts/products.context';
@@ -28,21 +33,25 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 ///======
 root.render(
   <React.StrictMode>
-    {/*===set router===*/}
-    <BrowserRouter>
-      {/*===set provider====*/}
-      <UserProvider>
-        {/*  <ProductsProvider>*/}
-        <CategoriesProvider>
-          <CartProvider>
-            <App />
-          </CartProvider>
-        </CategoriesProvider>
-        {/* </ProductsProvider>*/}
-      </UserProvider>
-      {/*===set provider====*/}
-    </BrowserRouter>
-    {/*===set router===*/}
+    {/*===Reudx===*/}
+    <Provider store={store}>
+      {/*===set router===*/}
+      <BrowserRouter>
+        {/*===set provider====*/}
+        {/* <UserProvider>*/}
+          {/*  <ProductsProvider>*/}
+           {/*<CategoriesProvider>*/}
+            <CartProvider>
+              <App />
+            </CartProvider>
+          {/*</CategoriesProvider>*/}
+          {/* </ProductsProvider>*/}
+        {/*</UserProvider>*/}
+        {/*===set provider====*/}
+      </BrowserRouter>
+      {/*===set router===*/}
+    </Provider>
+  {/*===Reudx===*/}
   </React.StrictMode>
 );
 
