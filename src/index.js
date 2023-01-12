@@ -7,7 +7,7 @@ import { UserProvider } from './contexts/user.context';
 //====Provider====
 //==== redux ====
 import { Provider } from 'react-redux';
-import {store} from './store/store';
+import { store } from './store/store';
 //=== redux ===
 //===categories===
 //===v1===
@@ -39,19 +39,19 @@ root.render(
       <BrowserRouter>
         {/*===set provider====*/}
         {/* <UserProvider>*/}
-          {/*  <ProductsProvider>*/}
-           {/*<CategoriesProvider>*/}
-            <CartProvider>
-              <App />
-            </CartProvider>
-          {/*</CategoriesProvider>*/}
-          {/* </ProductsProvider>*/}
+        {/*  <ProductsProvider>*/}
+        {/*<CategoriesProvider>*/}
+        {/* <CartProvider>*/}
+        <App />
+        {/*</CartProvider>*/}
+        {/*</CategoriesProvider>*/}
+        {/* </ProductsProvider>*/}
         {/*</UserProvider>*/}
         {/*===set provider====*/}
       </BrowserRouter>
       {/*===set router===*/}
     </Provider>
-  {/*===Reudx===*/}
+    {/*===Reudx===*/}
   </React.StrictMode>
 );
 
